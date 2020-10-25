@@ -1,3 +1,21 @@
+## Installation
+
+1. Have Node.js installed
+2. Install Yarn:
+
+```shell script
+npm i -g yarn
+```
+
+3. Checkout the repo
+4. In the repo root, run:
+
+```shell script
+yarn
+```
+
+---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
