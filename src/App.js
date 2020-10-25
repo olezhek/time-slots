@@ -16,14 +16,13 @@ function App() {
 
   return (
     <div className="container">
-      <header>
+      <header className="header sticky-top">
         <h1 className="text-center mt-5 mb-4">Time slots</h1>
         <div className="row d-flex justify-content-between">
           {data.map(({ name, id }) => (
-            <div className="col-3 text-center" key={id}>
+            <div className="col text-center" key={id}>
               <h5>{name}</h5>
               <div className="reservation">
-                {/*TODO: adjust condition and grouping*/}
                 {reservations[id] && <h5>Reservation on {formatDate(reservations[id].start_time)}</h5>}
                 <span
                   dangerouslySetInnerHTML={reservations[id]
@@ -36,7 +35,7 @@ function App() {
       </header>
       <div className="row d-flex justify-content-between">
         {data.map(({ timeSlots, id }) => (
-          <div className="col-3" key={id}>
+          <div className="col" key={id}>
             {Object.keys(timeSlots).map((date) => (
               <DayOfWeek
                 key={date}
