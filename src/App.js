@@ -7,7 +7,7 @@ function App() {
       <header className="header">
       </header>
     </div>
-  );
+  )
 }
 
 export default App
