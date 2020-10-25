@@ -7,14 +7,14 @@ export const slice = createSlice({
     data: [],
     reservations: {
       // companyId: {
-      //   from: null,
-      //   to: null
-      // }
+      //   start_time: null,
+      //   end_time: null
+      // },
+      // ...
     }
   },
   reducers: {
     setData: (state, action) => {
-      console.log('action', action)
       state.data = (action.payload || []).map(({ time_slots, ...companyInfo }) => {
         const timeSlots = (time_slots || []).reduce((slots, slot) => {
           const date = moment(slot.start_time).format('YYYY-MM-DD')
@@ -34,7 +34,6 @@ export const slice = createSlice({
       })
     },
     setReservation: (state, { payload, ...rest }) => {
-      console.log(payload, rest)
       state.reservations[payload.id] = payload.slot
     }
   }

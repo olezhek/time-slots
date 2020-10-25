@@ -7,7 +7,7 @@ export default function TimeSlot({ from, to, disabled, active, onSlotClick }) {
     <button
       onClick={() => { onSlotClick({ start_time: from, end_time: to }) }}
       key={`${from}-${to}`}
-      className={classnames('list-group-item', { active })}
+      className={classnames('list-group-item', { active, disabled })}
       dangerouslySetInnerHTML={{ __html: `${formatTime(from)} &ndash; ${formatTime(to)}` }}
     />
   )

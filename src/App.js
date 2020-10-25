@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { stateSelector, setData, setReservation } from './features/calendar/calendarSlice'
-import moment from 'moment'
 import { initializeData, formatDate, formatTime } from './utils'
 import DayOfWeek from './components/calendar/DayOfWeek'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -14,7 +13,7 @@ function App() {
   }, [])
 
   const { data, reservations } = useSelector(stateSelector)
-console.log(data)
+
   return (
     <div className="container">
       <header>
@@ -43,8 +42,9 @@ console.log(data)
                 key={date}
                 date={date}
                 timeSlots={timeSlots[date]}
-                handleSlotClick={(slot) => { console.log(slot); dispatch(setReservation({ id, slot })) }}
-                selectedSlot={reservations[id]}
+                handleSlotClick={(slot) => { dispatch(setReservation({ id, slot })) }}
+                companyId={id}
+                selectedSlots={reservations}
               />
             ))}
           </div>
