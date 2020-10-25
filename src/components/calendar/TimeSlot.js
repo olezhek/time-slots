@@ -2,7 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { formatTime } from '../../utils'
 
-export default function TimeSlot({ from, to, disabled, active, onSlotClick }) {
+const TimeSlot = React.memo(({ from, to, disabled, active, onSlotClick }) => {
   return (
     <button
       onClick={() => { onSlotClick({ start_time: from, end_time: to }) }}
@@ -11,4 +11,6 @@ export default function TimeSlot({ from, to, disabled, active, onSlotClick }) {
       dangerouslySetInnerHTML={{ __html: `${formatTime(from)} &ndash; ${formatTime(to)}` }}
     />
   )
-}
+})
+
+export default TimeSlot

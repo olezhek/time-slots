@@ -5,17 +5,17 @@ import { formatDate } from '../../utils'
 
 export default function DayOfWeek({ date, companyId, timeSlots, handleSlotClick, selectedSlots = {} }) {
   const selectedSlot = selectedSlots[companyId] || {}
-  const isSlotActive = (from, to) => (selectedSlot.start_time === from && selectedSlot.end_time === to)
-  const isSlotDisabled = (from, to) => (
-    Object.keys(selectedSlots).reduce((shouldBeDisabled, id) => {
-      return shouldBeDisabled
+  const slotShouldBeActive = (from, to) => (selectedSlot.start_time === from && selectedSlot.end_time === to)
+  const slotShouldBeDisabled = (from, to) => (
+    Object.keys(selectedSlots).reduce((disabled, id) => {
+      return disabled
         || (
-          moment(selectedSlots[id].start_time).isBefore(moment(from))
-          && moment(selectedSlots[id].end_time).isAfter(moment(to))
+          moment(selectedSlots[id].start_time).isSameOrBefore(moment(from))
+          && moment(selectedSlots[id].end_time).isSameOrAfter(moment(to))
         )
     }, false)
   )
-console.log(companyId)
+
   return (
     <div className="card day-of-week">
       <div className="card-body">
@@ -26,8 +26,8 @@ console.log(companyId)
               key={`${start_time}-${end_time}`}
               from={start_time}
               to={end_time}
-              active={isSlotActive(start_time, end_time)}
-              disabled={isSlotDisabled(start_time, end_time)}
+              active={slotShouldBeActive(start_time, end_time)}
+              disabled={slotShouldBeDisabled(start_time, end_time)}
               onSlotClick={handleSlotClick}
             />
           ))}
