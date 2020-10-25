@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { stateSelector, setData } from './features/calendar/calendarSlice'
-import initializeData from './utils/initializeData'
+import { stateSelector, setData, setReservation } from './features/calendar/calendarSlice'
+import moment from 'moment'
+import { initializeData, formatDate, formatTime } from './utils'
 import DayOfWeek from './components/calendar/DayOfWeek'
 import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
@@ -24,10 +25,10 @@ console.log(data)
               <h5>{name}</h5>
               <div className="reservation">
                 {/*TODO: adjust condition and grouping*/}
-                {reservations[id] && <h5>Reservation</h5>}
+                {reservations[id] && <h5>Reservation on {formatDate(reservations[id].start_time)}</h5>}
                 <span
                   dangerouslySetInnerHTML={reservations[id]
-                    ? { __html: `${reservations[id].from} &ndash; ${reservations[id].to}` }
+                    ? { __html: `${formatTime(reservations[id].start_time)} &ndash; ${formatTime(reservations[id].end_time)}` }
                     : { __html: '&mdash;' }} />
               </div>
             </div>
@@ -35,14 +36,15 @@ console.log(data)
         </div>
       </header>
       <div className="row d-flex justify-content-between">
-        {data.map(({ timeSlots }) => (
-          <div className="col-3">
+        {data.map(({ timeSlots, id }) => (
+          <div className="col-3" key={id}>
             {Object.keys(timeSlots).map((date) => (
               <DayOfWeek
                 key={date}
                 date={date}
                 timeSlots={timeSlots[date]}
-                handleSlotClick={() => {}}
+                handleSlotClick={(slot) => { console.log(slot); dispatch(setReservation({ id, slot })) }}
+                selectedSlot={reservations[id]}
               />
             ))}
           </div>

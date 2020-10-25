@@ -33,11 +33,14 @@ export const slice = createSlice({
         }
       })
     },
-
+    setReservation: (state, { payload, ...rest }) => {
+      console.log(payload, rest)
+      state.reservations[payload.id] = payload.slot
+    }
   }
 })
 
-export const { setData } = slice.actions
+export const { setData, setReservation } = slice.actions
 
 export const stateSelector = (state) => state.calendar
 
