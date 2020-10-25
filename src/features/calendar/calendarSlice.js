@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import moment from 'moment'
+import { sortTimeSlots } from '../../utils'
 
 export const slice = createSlice({
   name: 'calendar',
@@ -16,7 +17,7 @@ export const slice = createSlice({
   reducers: {
     setData: (state, action) => {
       state.data = (action.payload || []).map(({ time_slots, ...companyInfo }) => {
-        const timeSlots = (time_slots || []).reduce((slots, slot) => {
+        const timeSlots = ([...time_slots] || []).reduce((slots, slot) => {
           const date = moment(slot.start_time).format('YYYY-MM-DD')
           if (!slots[date]) {
             slots[date] = []
@@ -27,13 +28,17 @@ export const slice = createSlice({
           return slots
         }, {})
 
+        Object.keys(timeSlots).forEach((day) => {
+          timeSlots[day].sort(sortTimeSlots)
+        })
+
         return {
           ...companyInfo,
           timeSlots
         }
       })
     },
-    setReservation: (state, { payload, ...rest }) => {
+    setReservation: (state, { payload }) => {
       state.reservations[payload.id] = payload.slot
     }
   }
