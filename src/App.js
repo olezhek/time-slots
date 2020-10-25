@@ -33,7 +33,7 @@ function App() {
           ))}
         </div>
       </header>
-      <div className="row d-flex justify-content-between mt-3">
+      <div className="row d-flex justify-content-between mt-4">
         {data.map(({ timeSlots, id }) => (
           <div className="col" key={id}>
             {Object.keys(timeSlots).map((date) => (

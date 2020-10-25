@@ -13,3 +13,7 @@ body {
 .day-of-week:not(:first-child) {
   margin-top: 2rem;
 }
+
+.day-of-week:last-child {
+  margin-bottom: 4rem;
+}
