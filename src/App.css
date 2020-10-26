@@ -6,10 +6,6 @@ body {
   background-color: white;
 }
 
-.reservation {
-  min-height: 4rem;
-}
-
 .day-of-week:not(:first-child) {
   margin-top: 2rem;
 }
