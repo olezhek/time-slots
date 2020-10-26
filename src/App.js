@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { stateSelector, setData, setReservation } from './features/calendar/calendarSlice'
+import { stateSelector, setData, setReservation, removeReservation } from './features/calendar/calendarSlice'
 import { initializeData } from './utils'
 import { DayOfWeek, Reservation } from './components/calendar'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -24,6 +24,7 @@ function App() {
         <Reservation
           from={start_time}
           to={end_time}
+          handleRemove={() => { dispatch(removeReservation(id)) }}
         />
       </div>
     )

@@ -7,7 +7,7 @@ const Reservation = ({ from, to, handleRemove }) => {
 
   const removeReservation = (e) => {
     e.preventDefault()
-    handleRemove(from, to)
+    handleRemove()
   }
 
   const hasData = from && to
