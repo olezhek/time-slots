@@ -18,13 +18,13 @@ function App() {
     <div className="container">
       <header className="header sticky-top border-bottom">
         <h1 className="text-center mt-5 mb-4">Time slots</h1>
-        <div className="row d-flex justify-content-between">
+        <div className="row">
           {data.map(({ name, id }) => (
-            <div className="col text-center" key={id}>
-              <h5>{name}</h5>
-              <div className="reservation">
+            <div className="col" key={id}>
+              <h5 className="text-center">{name}</h5>
+              <div className="reservation text-center">
                 {reservations[id] && <h5>Reservation on {formatDate(reservations[id].start_time)}</h5>}
-                <span
+                <div
                   dangerouslySetInnerHTML={reservations[id]
                     ? { __html: `${formatTime(reservations[id].start_time)} &ndash; ${formatTime(reservations[id].end_time)}` }
                     : { __html: '&mdash;' }} />
@@ -33,7 +33,7 @@ function App() {
           ))}
         </div>
       </header>
-      <div className="row d-flex justify-content-between mt-4">
+      <div className="row mt-4">
         {data.map(({ timeSlots, id }) => (
           <div className="col" key={id}>
             {Object.keys(timeSlots).map((date) => (
